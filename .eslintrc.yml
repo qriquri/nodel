@@ -4,12 +4,14 @@ env:
 extends:
   - google
   - 'plugin:@typescript-eslint/recommended' # <-- TypeScript推奨ルールを追加
+  - prettier # 上の定義の整形に関するルールを無効化
 parser: '@typescript-eslint/parser'
 parserOptions:
   ecmaVersion: latest
   sourceType: module
 plugins:
   - '@typescript-eslint'
+  - prettier # eslint-plugin-prettier の追加
 rules: 
   # 関数の複雑さを 10 以下にする
   complexity: ['error', 10]

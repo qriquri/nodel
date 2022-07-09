@@ -6,13 +6,17 @@
   "author": "qriquri",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^28.1.4",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
     "cross-env": "^7.0.3",
     "eslint": ">=5.16.0",
     "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-loader": "^4.0.2",
+    "eslint-plugin-prettier": "^4.2.1",
     "jest": "^28.1.2",
+    "prettier": "^2.7.1",
     "thread-loader": "^3.0.4",
     "ts-jest": "^28.0.5",
     "ts-loader": "^9.3.1",
@@ -26,5 +30,8 @@
     "watch": "cross-env NODE_ENV=\"development\" webpack --watch",
     "start": "cd dist && node ./index.js",
     "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
   }
 }
