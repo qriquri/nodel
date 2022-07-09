@@ -1,9 +1,15 @@
 import Curl from '../src/Curl';
+import fs from 'fs';
+import path from 'path';
 
+// Curlクラスのインスタンス
 let curl: Curl;
+
+// 前準備
 beforeEach(() => {
   curl = new Curl();
 })
+
 describe('指定したURLにGETリクエストを送れる', () => {
   test('"https://www.google.com"にGETリクエストを送るとステータス200が返ってくる', async () => {
     // 前準備
@@ -60,8 +66,33 @@ describe('引数に -d "???=???&???=???" が指定されたとき 指定したUR
     // </前準備>
     // 実行
     const res = await curl.send(process.argv);
+    // dataがArrayBufferなので、文字列に直す
+    const dataStr = Buffer.from(new Uint16Array(res.data)).toString();
+    // jsonに変換
+    const json = JSON.parse(dataStr);
     // 前が実測値、後ろが期待値
-    expect(res?.data.form.text).toEqual("hello");
+    expect(json.form.text).toEqual("hello");
+  })
+})
+
+describe('引数に-o "ファイル名"　が指定されたとき、レスポンスをファイルに出力できる', () => {
+  test('"hello.txt"に"hello"と書き込める', () => {
+    const fileName = "hello.txt";
+    // なぜかtmpがsrcフォルダ以下に作られてしまうからこのようにする
+    const tmpPath = path.join(__dirname, "..", "src", "tmp");
+    const val = "hello";
+    // 実行
+    // ファイル出力
+    curl['outPut'](fileName, val);
+    // さっきのファイル読み込み
+    const writtenFiles = fs.readdirSync(tmpPath);
+    const writtenData = fs.readFileSync(path.join(tmpPath, writtenFiles[0])).toString();
+    // 検証
+    expect(writtenData).toEqual(val);
+
+    // 後始末
+    fs.unlinkSync(path.join(tmpPath, "/", writtenFiles[0]));
+    fs.rmdirSync(tmpPath);
   })
 })
 
