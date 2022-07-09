@@ -16,6 +16,14 @@ rules:
   # React のプロパティの型チェックを省略する (TypeScript でチェックされるため)
   react/prop-types: off
   # インターフェースの先頭文字を "I" にする
-  '@typescript-eslint/interface-name-prefix':
-    - error
-    - prefixWithI: 'always'
+  "@typescript-eslint/naming-convention": [
+    "error",
+    {
+      "selector": "interface",
+      "format": ["PascalCase"],
+      "custom": {
+        "regex": "^I[A-Z]",
+        "match": true
+      }
+    }
+  ]
