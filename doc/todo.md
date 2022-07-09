@@ -22,8 +22,8 @@ Javascript(node.js) を利用して、次の機能を満たすアプリケーシ
     - [×] "text=hello&index=5"をURLSearchParamsに変換できる
     - [×] 引数ミスった"texthello&index=5"をURLSearchParamsに変換できる
 
-- [] 引数に -d "???=???&???=???" が指定されたとき 指定したURLにパラメータ付きでPOSTリクエストを送れる
-    -[] 引数に -d "text=hello" が指定されたとき "http://httpbin.org/post" にパラメータ付きでPOSTリクエストを送り、レスポンスのform.textの値が"hello"
+- [×] 引数に -d "???=???&???=???" が指定されたとき 指定したURLにパラメータ付きでPOSTリクエストを送れる
+    -[×] 引数に -d "text=hello" が指定されたとき "http://httpbin.org/post" にパラメータ付きでPOSTリクエストを送り、レスポンスのdata.form.textの値が"hello"
 
 - [] 引数を取得できる
 
