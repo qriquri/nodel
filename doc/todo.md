@@ -11,13 +11,19 @@ Javascript(node.js) を利用して、次の機能を満たすアプリケーシ
 任意の組み合わせができるようにしてください。
 
 
-- [] 指定したURLにGETリクエストを送れる
+- [×] 指定したURLにGETリクエストを送れる
     - [×] "https://www.google.com"にGETリクエストを送るとステータス200が返ってくる
 
 
-- [] 引数に -X POST が指定されたとき 指定したURLにPOSTリクエストを送れる
+- [×] 引数に -X POST が指定されたとき 指定したURLにPOSTリクエストを送れる
     - [×] "引数に -X POST が指定されたとき "http://httpbin.org/post" に　POSTリクエストを送り、ステータス200が返ってくる"
-- [] 引数に -d が指定されたとき 指定したURLにパラメータ付きでPOSTリクエストを送れる
+
+- [×] "???=???&???=???"をURLSearchParamsに変換する
+    - [×] "text=hello&index=5"をURLSearchParamsに変換できる
+    - [×] 引数ミスった"texthello&index=5"をURLSearchParamsに変換できる
+
+- [] 引数に -d "???=???&???=???" が指定されたとき 指定したURLにパラメータ付きでPOSTリクエストを送れる
+    -[] 引数に -d "text=hello" が指定されたとき "http://httpbin.org/post" にパラメータ付きでPOSTリクエストを送り、レスポンスのform.textの値が"hello"
 
 - [] 引数を取得できる
 
