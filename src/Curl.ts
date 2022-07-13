@@ -17,7 +17,39 @@ export default class Curl {
      * @return {any}
      */
     public async send(args: string[]) {
-        // <引数読み取り>
+        // 引数読み取り
+        this.readArgs(args);
+        // リクエスト送信
+        const res = await this.request();
+        // 成功か失敗かを出力
+        console.log(res.status, res.statusText);
+        // ヘッダー表示
+        if (this.isVisibleHeaders) this.showHeader(res);
+        // 結果の出力
+        if (this.isOutput) {
+            // ファイル出力
+            this.outPut(this.fileName, res.data);
+        } else {
+            // ファイル出力しない場合は結果を出力
+            if (res.data.length >= 10000) {
+                // サイズが大きすぎる場合はコンソールに出力しない
+                const yellow  = '\u001b[33m';
+                const reset   = '\u001b[0m';
+                console.log(yellow + "This data is too large. This size is " + reset, res.data.length);
+            } else {
+                console.log(Buffer.from(new Uint16Array(res.data)).toString());
+            }
+        }
+
+        return res;
+
+    }
+
+    /**
+     * 引数の読み取り
+     * @param {string[]} args 
+     */
+    private readArgs(args: string[]){
         for (let i = 0; i < args.length; i++) {
             if (args[i] == '-X') {
                 // メソッドをPOSTに変換
@@ -39,33 +71,7 @@ export default class Curl {
                 this.url = args[i];
             }
         }
-        // </引数読み取り>
-        
-        // リクエスト送信
-        const res = await this.request();
-        // 成功か失敗かを出力
-        console.log(res.status, res.statusText);
-        // ヘッダー表示
-        if (this.isVisibleHeaders) this.showHeader(res);
-        if (this.isOutput) {
-            // ファイル出力
-            this.outPut(this.fileName, res.data);
-        } else {
-            // ファイル出力しない場合は結果を出力
-            if (res.data.length >= 10000) {
-                // サイズが大きすぎる場合はコンソールに出力しない
-                const yellow  = '\u001b[33m';
-                const reset   = '\u001b[0m';
-                console.log(yellow + "This data is too large. This size is " + reset, res.data.length);
-            } else {
-                console.log(Buffer.from(new Uint16Array(res.data)).toString());
-            }
-        }
-
-        return res;
-
     }
-
     /**
      * 
      * @param {string} arg 

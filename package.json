@@ -29,7 +29,7 @@
     "build": "cross-env NODE_ENV=\"development\" webpack --progress",
     "watch": "cross-env NODE_ENV=\"development\" webpack --watch",
     "start": "cd dist && node ./index.js",
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "dependencies": {
     "axios": "^0.27.2"
