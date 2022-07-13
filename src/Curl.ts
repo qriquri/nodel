@@ -62,8 +62,10 @@ export default class Curl {
                 this.params = this.convertParam(args[i + 1]);
                 i++;
             } else if (args[i] == '-v') {
+                // ヘッダーを出力するかどうか
                 this.isVisibleHeaders = true;
             } else if (args[i] == '-o') {
+                // ファイル出力するかどうかと出力するファイル名を設定
                 this.isOutput = true;
                 this.fileName = args[i + 1];
                 i++;
